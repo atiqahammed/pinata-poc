@@ -30,10 +30,18 @@ app.post("/token", async (req, res) => {
         }
     }
 
-    const result = await axios.post(url, params, config);
-    console.log(result.data);
+    let response = {}
 
-    res.send(result.data); 
+    try {
+        const result = await axios.post(url, params, config);
+        console.log(result.data);
+        response = result.data
+    } catch(err) {
+        response = {}
+    }
+    
+
+    res.send(response); 
 }); 
 
 app.listen(PORT, () => { 
